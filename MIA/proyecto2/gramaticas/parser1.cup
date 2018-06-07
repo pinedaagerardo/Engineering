@@ -1,0 +1,36 @@
+import java_cup.runtime.*;
+import java.io.*;
+import java.lang.*;
+
+parser code 
+{:
+public static void main(String args[]) throws Exception {
+	new parser(new Yylex(new FileInputStream(args[0]))).parse();
+} // fin procedimiento
+
+public void syntax_error(Symbol s) {
+	report_error("Error de sintaxis",null);
+} // fin procedimiento
+
+:}
+
+action code
+{:
+String data[16]=new String[16];
+
+:}
+
+
+terminal String PCOMA, EMPRESA, LICENCIA, UNIDADES, PRODUCTO, SO, FINI, FFIN, DIRECCION, SECTOR, AREA, COMILLAS, TAB, NUM, PAL;
+
+non terminal String s, linea;
+
+start with s;
+
+s ::= s linea {::}
+
+	| linea {::};
+
+linea ::= NUM:p1 TAB PALABRA:p2 TAB PALABRA:p3 TAB PALABRA:p4 TAB PALABRA:p5 TAB PALABRA:p6 TAB PALABRA:p7 TAB PALABRA:p8 TAB PALABRA:p9 TAB PALABRA:p10 TAB PALABRA:p11 TAB PALABRA:p12 TAB PALABRA:p13 TAB PALABRA:p14 TAB PALABRA:p15 TAB PALABRA:p16 {:
+:};
+
