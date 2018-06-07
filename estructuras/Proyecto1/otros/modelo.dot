@@ -1,0 +1,8 @@
+digraph modelo{
+node [color=Blue,fontname=Courier]
+categoria->{letra1 letra2}
+{rank=same letra1 letra2}
+letra1->{empresa1 empresa2}
+letra2->{empresa3 empresa4}
+{rank=same empresa1 empresa2 empresa3 empresa4}
+}

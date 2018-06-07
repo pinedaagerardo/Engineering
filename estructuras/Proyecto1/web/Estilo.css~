@@ -1,0 +1,266 @@
+/* 
+    Document   : Estilo
+    Created on : 12/03/2008, 09:00:57 AM
+    Author     : gerardo
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+root { 
+    display: block;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+a:link {
+	color: #0041A3;
+}
+
+a:hover {
+	text-decoration: none;
+	color: #FF0000;
+}
+
+a:visited {
+	color: #0041A3;
+}
+body {
+	margin: 0px;
+	padding: 0px;
+	background: #FFFFFF url(images/back_all.gif) repeat-x;
+	font: 13px Arial, Helvetica, sans-serif;
+	color: #333333;
+}
+
+#main
+{
+background: url(images/header.gif) no-repeat;
+width: 982px;
+height: 284px;
+}
+
+#header {
+	width: 778px;
+	height: 284px;
+}
+
+#logo {
+	padding-left: 200px;
+	width: 578px;
+	padding-top: 100px;
+	height: 100px;
+}
+
+#logo h1 {
+	font-size: 28px;
+	font-weight: normal;
+}
+
+#logo h1 a {
+	color: #ffffff;
+}
+
+#logo h2 {
+	margin-top: 5px;
+    font-size: 14px;
+	font-weight: normal;
+}
+
+#logo h2 a {
+	color: #ffffff;
+}
+
+#logo a {
+	text-decoration: none;
+	text-transform: lowercase;
+	font-style: italic;
+}
+
+#metamorph { 
+    font-size: 14px;
+	color: #ffffff;
+}
+#menu {
+	padding-left: 220px;
+	padding-top: 48px;
+}
+
+#menu ul {
+	margin: 0;
+	list-style: none;
+}
+
+#menu li {
+	display: inline;
+}
+
+#menu a {
+	display: block;
+	float: left;
+	width: 90px;
+	height: 20px;
+	background: url(images/buttone.gif) no-repeat;
+	margin-left: 1px;
+	padding-top: 8px;
+	text-align: center;
+	text-decoration: none;
+	color: #ffffff;
+	font-weight: bold;
+	font-size: 14px;
+}
+
+#menu a:hover {
+	height: 34px;
+	margin-top: -3px;
+}
+
+#content
+{
+width: 838px;
+padding: 10px
+}
+
+#left
+{
+	float: left;
+	width: 200px;
+	padding-right: 1em;
+}
+
+
+
+#right
+{
+float: right;
+width: 600px;
+}
+
+#right H4
+{
+	font-size: 12px;
+	color: #0041A3;
+
+}
+
+#right H1
+{
+	font-size: 28px;
+	color: #0041A3;
+	padding-bottom: 10px
+}
+
+#right a
+{
+color: #0041A3;
+text-decoration: none;
+}
+
+#right p {
+	margin: 0;
+	padding: 0;
+	padding-bottom: 10px;
+}
+
+#right h2 {
+	margin: 0;
+	padding: 0;
+	padding-top: 10px;
+	color: #0041A3;
+}
+.date {
+	text-align: right;
+	color: #0041A3;
+	font-size: 11px;
+	background-color: #fff;
+}
+
+.date a {
+	color: #0041A3;
+	background-color: #fff;
+}
+
+#right .pic
+{
+float: left;
+margin: 5px;
+}
+
+#right .pic1
+{
+float: right;
+margin: 5px;
+}
+
+#metamorph1 {
+	clear: both;
+	height: 36px;
+	padding: 15px 0;
+	background: #000000 url(images/footer.jpg) no-repeat;
+	border-top: 5px solid #5592C6;
+	text-align: center;
+}
+
+#metamorph1 p {
+	margin: 0;
+	color: #000000;
+	font-size: 10px;
+}
+
+#metamorph1 a {
+	color: #000000;
+	font-size: 10px;
+}
+
+#metamorph1 a:hover {
+	color: #FF0000;
+}
+.small p {
+	margin: 0;
+	font-size: 11px;
+}
+.boxed {
+	margin-bottom: 20px;
+}
+
+.boxed .title {
+	height: 33px;
+	width: 207px;
+	padding: 13px 0 0 20px;
+	background: url(images/title.gif) no-repeat;
+	font-size: 14px;
+	color: #FFFFFF;
+}
+
+.boxed .content2 {
+	padding: 10px;
+}
+
+
+
+
+#updates ul {
+	margin: 0;
+	list-style: none;
+}
+
+#updates h3 {
+	margin: 0;
+	font: bold x-small Verdana, Arial, Helvetica, sans-serif;
+}
+
+#updates p {
+	margin-bottom: 1.4em;
+	font-size: smaller;
+	line-height: normal;
+}
+
+
+

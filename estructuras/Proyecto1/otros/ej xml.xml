@@ -1,0 +1,18 @@
+<directorio>
+	  <empresa categoria="nomCategoria">
+		     <nombre>laEmpresa</nombre>
+		     <descripcion>Buen Lugar</descripcion>
+		     <direccion>zona 1</direccion>
+		     <telefono>21111111</telefono>
+		     <sitio>www.laEmpresa.com.gt</sitio>
+		     <logo>/home/gerardo/Imágenes/p3.png</logo>
+	  </empresa>
+	  <empresa categoria="otraCat">
+		     <nombre>laEmpresa2</nombre>
+		     <descripcion>Buen Lugar</descripcion>
+		     <direccion>zona 1</direccion>
+		     <telefono>21111111</telefono>
+		     <sitio>www.laEmpresa.com.gt</sitio>
+		     <logo>/home/gerardo/Imágenes/p3.png</logo>
+	  </empresa>
+</directorio>
