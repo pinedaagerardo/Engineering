@@ -1,0 +1,161 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E6D99913-5CFB-4F05-AEA3-2288322D845C}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WindowsApplication1</RootNamespace>
+    <AssemblyName>WindowsApplication1</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CalithaLib, Version=1.13.2403.14266, Culture=neutral, PublicKeyToken=6fe80ec331a66ec8, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\CalithaLib.dll</HintPath>
+    </Reference>
+    <Reference Include="GoldParserEngine, Version=1.13.2403.14266, Culture=neutral, PublicKeyToken=6fe80ec331a66ec8, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\GoldParserEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FileMan.cs" />
+    <Compile Include="infoArbol.cs" />
+    <Compile Include="GUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI.Designer.cs">
+      <DependentUpon>GUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Estructura.cs" />
+    <Compile Include="InfoTabla.cs" />
+    <Compile Include="JButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="JButtonGroup.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="JCheckBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="JComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="JFileChooser.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="JForm.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="JLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="JPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="JPasswordField.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="JRadioButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="JTable.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="JTextArea.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="JTextField.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="JTree.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="parser.cs" />
+    <Compile Include="Posiciones.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="GUI.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>GUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VentanaNuevo.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>VentanaNuevo.cs</DependentUpon>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\DataSources\Program.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="TablaSimbolos.cs" />
+    <Compile Include="VentanaNuevo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VentanaNuevo.Designer.cs">
+      <DependentUpon>VentanaNuevo.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\Documents2.ico" />
+    <Content Include="Images\Error.ico" />
+    <Content Include="Images\Find.ico" />
+    <Content Include="Images\Refresh.ico" />
+    <Content Include="Images\CLSDFOLD.ICO" />
+    <Content Include="Images\folder.ico" />
+    <Content Include="Images\file.ico" />
+    <Content Include="Images\OPENFOLD.ICO" />
+    <Content Include="Images\Sync.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,664 @@
+"Name"    = 'Gramatica JAVA'
+"Version" = '1.0'
+"Author"  = 'Gerardo Pineda'
+"About"   = 'gramatica para java'
+
+! -------------------------------------------------------- Sets
+
+{Quote} = ['']
+{IdLetra} = {Letter} + [_$]
+{IdAlfa} = {Alphanumeric} + [_$]
+{LetraString} = {Printable} + {Letter Extended} - ["]
+{HexEscapeSign} =[uUxX]
+{HexDigito} = {Digit} + [abcdefABCDEF]
+{OctalCharSet} = [01234567]
+{NoZeroDigit} = [123456789]
+{LongTypeSuffix} =[lL]
+{FloatTypeSuffix} =[dfDF]
+{IndicadorExp} = [eE]
+{Signo} = [-+]
+{LetraChar} = {LetraString} - [\]
+{CharE} = [abtnfr"\] + {Quote}
+
+! -------------------------------------------------------- Terminals
+
+Id     = {IdLetra}{IdAlfa}*
+String    = '"'({LetraChar}|('\'{CharE}))*'"'
+NumFloat   = {Digit}+'.'{Digit}+{FloatTypeSuffix}? | {Digit}+{FloatTypeSuffix} | '.'{Digit}+{FloatTypeSuffix}?
+NumFloatExp = {Digit}+'.'{Digit}+{IndicadorExp}{Signo}?{Digit}+{FloatTypeSuffix}? | {Digit}+{IndicadorExp}{Signo}?{Digit}+{FloatTypeSuffix}? | '.'{Digit}+{IndicadorExp}{Signo}?{Digit}+{FloatTypeSuffix}?
+Bool = 'true' | 'false'
+CharIndirecto = {Quote}{LetraChar}{Quote}
+StEscapeChar = {Quote}'\'{CharE}{Quote}
+Num = {NoZeroDigit}{Digit}*{LongTypeSuffix}?
+NumCero = '0'{LongTypeSuffix}?
+NumHex = '0'('x'|'X'){HexDigito}+{LongTypeSuffix}?
+HexEscapeChar ={Quote}'\'{HexEscapeSign}{HexDigito}+{Quote}
+NumOctal = '0'{OctalCharSet}+{LongTypeSuffix}?
+OctalEscapeChar ={Quote}'\'{OctalCharSet}+{Quote}
+ExprNull = 'null'
+Comment Start = '/*'
+Comment End = '*/'
+Comment Line = '//'
+
+! -------------------------------------------------------- Rules
+
+"Case Sensitive" = 'True'
+"Start Symbol"   = <Program>
+
+<Program> 
+        ::= <DeclaracionPaquete> <DeclaracionesImport> <DeclaracionesTipo>
+         |  <DeclaracionPaquete> <DeclaracionesImport>
+         |  <DeclaracionPaquete> <DeclaracionesTipo>
+         |  <DeclaracionPaquete>
+         |  <DeclaracionesImport> <DeclaracionesTipo>
+         |  <DeclaracionesImport>
+         |  <DeclaracionesTipo>
+         |  
+
+<DeclaracionesImport> 
+        ::= <DeclaracionImport>
+         |  <DeclaracionesImport> <DeclaracionImport>
+
+<DeclaracionesTipo> 
+        ::= <DeclaracionTipo>
+         |  <DeclaracionesTipo> <DeclaracionTipo>
+
+<DeclaracionPaquete> 
+        ::= 'package' <Nombre> ';'
+
+<DeclaracionImport>
+        ::= <ImportSimple>
+         |  <ImportClasificado>
+
+<ImportSimple> 
+        ::= 'import' <Nombre> ';'
+
+<ImportClasificado> 
+        ::= 'import' <Nombre> '.' '*' ';'
+
+<DeclaracionTipo> 
+        ::= <DeclaracionClase>
+         |  <DeclaracionInterfaz>
+         |  ';'
+
+<Modificadores> 
+        ::= <Modificador>
+         |  <Modificadores> <Modificador>
+
+<Modificador> 
+        ::= 'public'
+         |  'protected'
+         |  'private'
+         |  'static'
+         |  'abstract'
+         |  'final'
+         |  'native'
+         |  'synchronized'
+         |  'transient'
+         |  'volatile'
+
+<DeclaracionClase> 
+        ::= <Modificadores> 'class' Id <Super> <Interfaces> <CuerpoClase>
+         |  <Modificadores> 'class' Id <Super>  <CuerpoClase>
+         |  <Modificadores> 'class' Id <Interfaces> <CuerpoClase>
+         |  <Modificadores> 'class' Id <CuerpoClase>
+         |  'class' Id <Super> <Interfaces> <CuerpoClase>
+         |  'class' Id <Super> <CuerpoClase>
+         |  'class' Id <Interfaces> <CuerpoClase>
+         |  'class' Id <CuerpoClase>
+
+<Super> ::= 'extends' <TipoClase>
+
+<Interfaces> ::= 'implements' <InterfaceTypeList>
+
+<InterfaceTypeList> ::= <TipoInterfaz>
+                        | <InterfaceTypeList> ',' <TipoInterfaz>
+
+<CuerpoClase> 
+        ::= '{' <DeclaracionesCuerpoClase> '}'
+         |  '{' '}'
+               
+
+<DeclaracionesCuerpoClase> 
+        ::= <DeclaracionCuerpoClase>
+         |  <DeclaracionesCuerpoClase> <DeclaracionCuerpoClase>
+
+<DeclaracionCuerpoClase> 
+        ::= <DeclaracionMiembroClase>
+         |  <StaticIni>
+         |  <DeclaracionConstructor>
+
+<DeclaracionMiembroClase>
+        ::= <DeclaracionCampo>
+         |  <DeclaracionMetodo>
+
+<DeclaracionCampo> 
+        ::= <Modificadores> <Tipo> <DeclaradoresVariable> ';'
+         |  <Tipo> <DeclaradoresVariable> ';'
+
+<DeclaradoresVariable>
+        ::= <DeclaradorVariable>
+         |  <DeclaradoresVariable> ',' <DeclaradorVariable>
+
+<DeclaradorVariable> 
+        ::= <DeclaradorVariableId>
+         |  <DeclaradorVariableId> '=' <VariableIni>
+
+<DeclaradorVariableId> 
+        ::= Id
+         |  <DeclaradorVariableId> '[' ']'
+
+<VariableIni> 
+        ::= <Expresion>
+         |  <ArrayIni>
+
+<DeclaracionMetodo> ::= <CabeceraMetodo> <CuerpoMetodo>
+
+<CabeceraMetodo>
+        ::= <Modificadores> <Tipo> <DeclaradorMetodo> <Throws>
+         |  <Modificadores> <Tipo> <DeclaradorMetodo>
+         |  <Tipo> <DeclaradorMetodo> <Throws>
+         |  <Tipo> <DeclaradorMetodo>
+         |  <Modificadores> 'void' <DeclaradorMetodo> <Throws>
+         |  <Modificadores> 'void' <DeclaradorMetodo>
+         |  'void' <DeclaradorMetodo> <Throws>
+         |  'void' <DeclaradorMetodo>
+
+<DeclaradorMetodo>
+        ::= Id '(' <ParamList> ')'
+         |  Id '(' ')'
+         |  <DeclaradorMetodo> '[' ']'
+
+<ParamList> 
+        ::= <Param>
+         |  <ParamList> ',' <Param>
+
+<Param> 
+        ::= <Tipo> <DeclaradorVariableId>
+
+<Caracter> 
+        ::= CharIndirecto
+         |  StEscapeChar
+         |  OctalEscapeChar
+         |  HexEscapeChar
+
+<numdecimal> 
+        ::= NumCero
+         |  Num
+
+<float> 
+        ::= NumFloat
+         |  NumFloatExp
+
+<Int> 
+        ::= <numdecimal>
+         |  NumHex  
+         |  NumOctal
+
+
+<Literal> 
+        ::= <Int>
+         |  <float>
+         |  Bool
+         |  <Caracter>
+         |  String
+         |  ExprNull
+
+<Tipo>  ::= <TipoPrimitivo>
+         |  <TipoReferencia>
+
+<TipoPrimitivo> ::= <TipoNumerico>
+                  | 'boolean'
+
+<TipoNumerico> 
+        ::= <TipoInt>
+         |  <TipoFlotante>
+
+<TipoInt>
+        ::= 'byte'
+         |  'short'
+         |  'int'
+         |  'long'
+         |  'char'
+
+<TipoFlotante> 
+        ::= 'float'
+         |  'double'
+
+<TipoReferencia> 
+        ::= <TipoClaseInterfaz>
+         |  <TipoArray>
+
+<TipoClaseInterfaz> ::= <Nombre>
+
+<TipoClase> ::= <TipoClaseInterfaz>
+
+<TipoInterfaz> ::= <TipoClaseInterfaz>
+
+<TipoArray>
+        ::= <TipoPrimitivo> '[' ']'
+         |  <Nombre> '[' ']'
+         |  <TipoArray> '[' ']'
+
+<Nombre>
+        ::= <NombreSimple>
+         |  <NombreClasificado>
+
+<NombreSimple> ::= Id
+
+<NombreClasificado> ::= <Nombre> '.' Id
+
+<Throws> 
+        ::= 'throws' <ListaTipoClase>
+
+<ListaTipoClase>
+        ::= <TipoClase>
+         |  <ListaTipoClase> ',' <TipoClase>
+
+<CuerpoMetodo> 
+        ::= <Block>
+         |  ';'
+
+<StaticIni> 
+        ::= 'static' <Block>
+
+<DeclaracionConstructor>
+        ::= <Modificadores> <ConstructorDeclarator> <Throws> <CuerpoConstructor>
+         |  <Modificadores> <ConstructorDeclarator> <CuerpoConstructor>
+         |  <ConstructorDeclarator> <Throws> <CuerpoConstructor>
+         |  <ConstructorDeclarator> <CuerpoConstructor>
+
+<ConstructorDeclarator>
+        ::= <NombreSimple> '(' <ParamList> ')'
+         |  <NombreSimple> '(' ')'
+
+<CuerpoConstructor> 
+        ::= '{' <InvoExplicitaConstructor> <BlockSentencias> '}'
+         |  '{' <InvoExplicitaConstructor> '}'
+         |  '{' <BlockSentencias> '}'
+         |  '{' '}'
+
+<InvoExplicitaConstructor>
+        ::= 'this' '(' <ListaArgumento> ')' ';'
+         |  'this' '(' ')' ';'
+         |  'super' '(' <ListaArgumento> ')' ';'
+         |  'super' '(' ')' ';'
+                                   
+<DeclaracionInterfaz> 
+        ::= <Modificadores> 'interface' Id <ExtendsInterfaces> <CuerpoInterfaz>
+         |  <Modificadores> 'interface' Id <CuerpoInterfaz>
+         |  'interface' Id <ExtendsInterfaces> <CuerpoInterfaz>
+         |  'interface' Id <CuerpoInterfaz>
+
+<ExtendsInterfaces> 
+        ::= 'extends' <TipoInterfaz>
+         |  <ExtendsInterfaces> ',' <TipoInterfaz>
+
+<CuerpoInterfaz> 
+        ::= '{' <DeclaracionesMiembroInterfaz> '}'
+         |  '{' '}'
+
+<DeclaracionesMiembroInterfaz> 
+        ::= <DeclaracionMiembroInterfaz>
+         |  <DeclaracionesMiembroInterfaz> <DeclaracionMiembroInterfaz>
+
+<DeclaracionMiembroInterfaz> 
+        ::= <DeclaracionConstante>
+         |  <DeclaracionMetodoAbstracto>
+
+<DeclaracionConstante> ::= <DeclaracionCampo>
+
+<DeclaracionMetodoAbstracto> ::= <CabeceraMetodo> ';'
+
+<ArrayIni>
+        ::= '{' <VariableInis> ',' '}'
+         |  '{' <VariableInis> '}'
+         |  '{' ',' '}'
+         |  '{' '}'
+
+<VariableInis> ::= <VariableIni>
+                        | <VariableInis> ',' <VariableIni>
+
+<Block> ::= '{' <BlockSentencias> '}'
+         |  '{' '}'
+
+<BlockSentencias> 
+        ::= <BlockSentencia>
+         |  <BlockSentencias> <BlockSentencia>
+
+<BlockSentencia>
+        ::= <SentenciaDeclaracionVariableLocal>
+         |  <Sentencia>
+
+<SentenciaDeclaracionVariableLocal> 
+        ::= <DeclaracionVariableLocal> ';'
+
+<DeclaracionVariableLocal> 
+        ::= <Tipo> <DeclaradoresVariable>
+
+<Sentencia>
+        ::= <SentenciaSinSubsentencia>
+         |  <LabeledSentencia>
+         |  <IfThenSentencia>
+         |  <IfThenElseSentencia>
+         |  <WhileSentencia>
+         |  <ForSentencia>
+
+<SentenciaIfExtendido> 
+        ::= <SentenciaSinSubsentencia>
+         |  <LabeledSentenciaIfExtendido>
+         |  <IfThenElseSentenciaIfExtendido>
+         |  <WhileSentenciaIfExtendido>
+         |  <ForSentenciaIfExtendido>
+
+<SentenciaSinSubsentencia> 
+        ::= <Block>
+         |  <EmptySentencia>
+         |  <ExpresionSentencia>
+         |  <SwitchSentencia>
+         |  <DoSentencia>
+         |  <BreakSentencia>
+         |  <ContinueSentencia>
+         |  <ReturnSentencia>
+         |  <SynchronizedSentencia>
+         |  <ThrowSentencia>
+         |  <TrySentencia>
+
+<EmptySentencia> 
+        ::= ';'
+
+<LabeledSentencia> 
+        ::= Id ':' <Sentencia>
+
+<LabeledSentenciaIfExtendido> 
+        ::= Id ':' <SentenciaIfExtendido>
+
+<ExpresionSentencia> 
+        ::= <SentenciaExpresion> ';'
+
+<SentenciaExpresion>
+        ::= <Asignacion>
+         |  <PreIncrementoExpresion>
+         |  <PreDecrementoExpresion>
+         |  <PostIncrementoExpresion>
+         |  <PostDecrementoExpresion>
+         |  <InvocacionMetodo>
+         |  <CreacionInstancia>
+
+<IfThenSentencia> 
+        ::= 'if' '(' <Expresion> ')' <Sentencia>
+
+<IfThenElseSentencia> 
+        ::= 'if' '(' <Expresion> ')' <SentenciaIfExtendido> 'else' <Sentencia>
+
+<IfThenElseSentenciaIfExtendido> 
+        ::= 'if' '(' <Expresion> ')' <SentenciaIfExtendido> 'else' <SentenciaIfExtendido>
+
+<SwitchSentencia> 
+        ::= 'switch' '(' <Expresion> ')' <SwitchBlock>
+
+<SwitchBlock> 
+        ::= '{' <GruposSwitch> <SwitchLabels> '}'
+         |  '{' <GruposSwitch> '}'
+         |  '{' <SwitchLabels> '}'
+         |  '{' '}'
+
+<GruposSwitch>
+        ::= <GrupoSwitch>
+         |  <GruposSwitch> <GrupoSwitch>
+
+<GrupoSwitch> 
+        ::= <SwitchLabels> <BlockSentencias>
+
+<SwitchLabels>
+        ::= <SwitchLabel>
+         |  <SwitchLabels> <SwitchLabel>
+
+<SwitchLabel> 
+        ::= 'case' <ExpresionConstante> ':'
+         |  'default' ':'
+
+<WhileSentencia> 
+        ::= 'while' '(' <Expresion> ')' <Sentencia>
+
+<WhileSentenciaIfExtendido>
+        ::= 'while' '(' <Expresion> ')' <SentenciaIfExtendido>
+
+<DoSentencia> 
+        ::= 'do' <Sentencia> 'while' '(' <Expresion> ')' ';'
+
+<ForSentencia> 
+        ::= 'for' '(' <InicializarFor> ';' <Expresion> ';' <ForActualizar> ')' <Sentencia>
+         |  'for' '(' <InicializarFor> ';' <Expresion> ';' ')' <Sentencia>
+         |  'for' '(' <InicializarFor> ';' ';' <ForActualizar> ')' <Sentencia>
+         |  'for' '(' <InicializarFor> ';' ';' ')' <Sentencia>
+         |  'for' '(' ';' <Expresion> ';' <ForActualizar> ')' <Sentencia>
+         |  'for' '(' ';' <Expresion> ';' ')' <Sentencia>
+         |  'for' '(' ';' ';' <ForActualizar> ')' <Sentencia>
+         |  'for' '(' ';' ';'  ')' <Sentencia>
+
+<ForSentenciaIfExtendido> 
+        ::= 'for' '(' <InicializarFor> ';' <Expresion> ';' <ForActualizar> ')' <SentenciaIfExtendido>
+         |  'for' '(' <InicializarFor> ';' <Expresion> ';' ')' <SentenciaIfExtendido>
+         |  'for' '(' <InicializarFor> ';' ';' <ForActualizar> ')' <SentenciaIfExtendido>
+         |  'for' '(' <InicializarFor> ';' ';' ')' <SentenciaIfExtendido>
+         |  'for' '(' ';' <Expresion> ';' <ForActualizar> ')' <SentenciaIfExtendido>
+         |  'for' '(' ';' <Expresion> ';' ')' <SentenciaIfExtendido>
+         |  'for' '(' ';' ';' <ForActualizar> ')' <SentenciaIfExtendido>
+         |  'for' '(' ';' ';' ')' <SentenciaIfExtendido>
+
+<InicializarFor> ::= <ListadoSentenciaExpresion>
+            | <DeclaracionVariableLocal>
+
+<ForActualizar> ::= <ListadoSentenciaExpresion>
+
+<ListadoSentenciaExpresion> 
+        ::= <SentenciaExpresion>
+         |  <ListadoSentenciaExpresion> ',' <SentenciaExpresion>
+
+<Primary> 
+        ::= <PrimaryNoNewArray>
+         |  <CreacionArray>
+
+<PrimaryNoNewArray> 
+        ::= <Literal>
+         |  'this'
+         |  '(' <Expresion> ')'
+         |  <CreacionInstancia>
+         |  <AccesoCampo>
+         |  <InvocacionMetodo>
+         |  <AccesoArray>
+
+<CreacionInstancia> 
+        ::= 'new' <TipoClase> '(' <ListaArgumento> ')'
+         |  'new' <TipoClase> '(' ')'
+
+<ListaArgumento> 
+        ::= <Expresion>
+         |  <ListaArgumento> ',' <Expresion>
+
+<CreacionArray> 
+        ::= 'new' <TipoPrimitivo> <ExprsCorchetes> <Corchetes>
+         |  'new' <TipoPrimitivo> <ExprsCorchetes>
+         |  'new' <TipoClaseInterfaz> <ExprsCorchetes> <Corchetes>
+         |  'new' <TipoClaseInterfaz> <ExprsCorchetes>
+
+<ExprsCorchetes> 
+        ::= <ExprCorchetes>
+         |  <ExprsCorchetes> <ExprCorchetes>
+
+<ExprCorchetes> ::= '[' <Expresion> ']'
+
+<Corchetes> ::= '[' ']'
+         | <Corchetes> '[' ']'
+
+<AccesoCampo> 
+        ::= <Primary> '.' Id
+         |  'super' '.' Id
+
+<InvocacionMetodo>
+        ::= <Nombre> '(' <ListaArgumento> ')'
+         |  <Nombre> '(' ')'
+         |  <Primary> '.' Id '(' <ListaArgumento> ')'
+         |  <Primary> '.' Id '(' ')'
+         |  'super' '.' Id '(' <ListaArgumento> ')'
+         |  'super' '.' Id '(' ')'
+
+<AccesoArray> 
+        ::= <Nombre> '[' <Expresion> ']'
+         |  <PrimaryNoNewArray> '[' <Expresion> ']'
+
+<CastExpresion>
+        ::= '(' <TipoPrimitivo> <Corchetes> ')' <UnarioExpresion>
+         |  '(' <TipoPrimitivo> ')' <UnarioExpresion>
+         |  '(' <Expresion> ')' <UnarioExpresionOtra>
+         |  '(' <Nombre> <Corchetes> ')' <UnarioExpresionOtra>
+
+<MultExpresion>
+        ::= <UnarioExpresion>
+         |  <MultExpresion> '*' <UnarioExpresion>
+         |  <MultExpresion> '/' <UnarioExpresion>
+         |  <MultExpresion> '%' <UnarioExpresion>
+
+<AddExpresion>
+        ::= <MultExpresion>
+         |  <AddExpresion> '+' <MultExpresion>
+         |  <AddExpresion> '-' <MultExpresion>
+
+<ShiftExpresion>
+        ::= <AddExpresion>
+         |  <ShiftExpresion> '<<' <AddExpresion>
+         |  <ShiftExpresion> '>>' <AddExpresion>
+         |  <ShiftExpresion> '>>>' <AddExpresion>
+
+<ExpresionComparar>
+        ::= <ShiftExpresion>
+         |  <ExpresionComparar> '<' <ShiftExpresion>
+         |  <ExpresionComparar> '>' <ShiftExpresion>
+         |  <ExpresionComparar> '<=' <ShiftExpresion>
+         |  <ExpresionComparar> '>=' <ShiftExpresion>
+         |  <ExpresionComparar> 'instanceof' <TipoReferencia>
+
+<ExpresionIgual>
+        ::= <ExpresionComparar>
+         |  <ExpresionIgual> '==' <ExpresionComparar>
+         |  <ExpresionIgual> '!=' <ExpresionComparar>
+
+<AndExpresion>
+        ::= <ExpresionIgual>
+         |  <AndExpresion> '&' <ExpresionIgual>
+
+<OrExclusivoExpresion>
+        ::= <AndExpresion>
+         |  <OrExclusivoExpresion> '^' <AndExpresion>
+
+<OrInclusivoExpresion> 
+        ::= <OrExclusivoExpresion>
+         |  <OrInclusivoExpresion> '|' <OrExclusivoExpresion>
+
+<AndCondicionalExpresion>
+        ::= <OrInclusivoExpresion>
+         |  <AndCondicionalExpresion> '&&' <OrInclusivoExpresion>
+
+<OrCondicionalExpresion>
+        ::= <AndCondicionalExpresion>
+         |  <OrCondicionalExpresion> '||' <AndCondicionalExpresion>
+
+<ExpresionCondicional> 
+        ::= <OrCondicionalExpresion>
+         |  <OrCondicionalExpresion> '?' <Expresion> ':' <ExpresionCondicional>
+
+<PosfijoExpresion>
+        ::= <Primary>
+         |  <Nombre>
+         |  <PostIncrementoExpresion>
+         |  <PostDecrementoExpresion>
+
+<PostIncrementoExpresion>
+        ::= <PosfijoExpresion> '++'
+
+<PostDecrementoExpresion>
+        ::= <PosfijoExpresion> '--'
+
+<UnarioExpresion>
+        ::= <PreIncrementoExpresion>
+         |  <PreDecrementoExpresion>
+         |  '+' <UnarioExpresion>
+         |  '-' <UnarioExpresion>
+         |  <UnarioExpresionOtra>
+
+<PreIncrementoExpresion> 
+        ::= '++' <UnarioExpresion>
+
+<PreDecrementoExpresion>
+        ::= '--' <UnarioExpresion>
+
+<UnarioExpresionOtra> 
+        ::= <PosfijoExpresion>
+         |  '~' <UnarioExpresion>
+         |  '!' <UnarioExpresion>
+         |  <CastExpresion>
+
+<ExpresionAsigna> 
+        ::= <ExpresionCondicional>
+         |  <Asignacion>
+
+<Expresion> ::= <ExpresionAsigna>
+
+<ExpresionConstante> ::= <Expresion>
+
+<Asignacion>
+        ::= <LeftSide> <OperadorAsignacion> <ExpresionAsigna>
+
+<LeftSide> 
+        ::= <Nombre>
+         |  <AccesoCampo>
+         |  <AccesoArray>
+
+<OperadorAsignacion> 
+        ::= '='
+         |  '*='
+         |  '/='
+         |  '%='
+         |  '+='
+         |  '-='
+         |  '<<='
+         |  '>>='
+         |  '>>>='
+         |  '&='
+         |  '^='
+         |  '|='
+
+<ContinueSentencia>
+        ::= 'continue' Id ';'
+         |  'continue' ';'
+
+<ReturnSentencia> 
+        ::= 'return' <Expresion> ';'
+         |  'return' ';'
+
+<ThrowSentencia> 
+        ::= 'throw' <Expresion> ';'
+
+<SynchronizedSentencia> 
+        ::= 'synchronized' '(' <Expresion> ')' <Block>
+
+<TrySentencia>
+        ::= 'try' <Block> <Catches>
+         |  'try' <Block> <Catches> <Finally>
+         |  'try' <Block> <Finally>
+
+<Catches>
+        ::= <Catch>
+         |  <Catches> <Catch>
+
+<Catch>
+        ::= 'catch' '(' <Param> ')' <Block>
+
+<Finally> 
+        ::= 'finally' <Block>
+
+<BreakSentencia> 
+        ::= 'break' Id ';'
+         |  'break' ';'
+

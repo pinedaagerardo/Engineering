@@ -1,0 +1,75 @@
+package BaseDatos;
+import javax.activation.*;
+import javax.mail.*;
+import javax.mail.internet.*;
+import java.util.Properties;
+public class Mail
+{
+public Mail(String destino, String mensaje){
+SendAuthentication.Send(destino, mensaje);
+}
+}
+class SendAuthentication
+{
+public static void Send(String destino, String mensaje)
+{
+String host ="127.0.0.1";//Suponiendo que el servidor SMTPsea la propia máquina
+String from ="Ivina Acuña";
+Properties prop = new Properties();
+prop.put("mail.smtp.host", host);
+/*Esta línea es la que indica al API que debe autenticarse*/
+prop.put("mail.smtp.auth", "true");
+/*Añadir esta linea si queremos ver una salida detallada del programa*/
+//prop.put("mail.debug", "true");
+try{
+SMTPAuthentication auth = new SMTPAuthentication();
+Session session = Session.getInstance(prop , auth );
+Message msg = getMessage(session, from, destino, mensaje);
+System.out.println ("Enviando ..." );
+Transport.send(msg);
+System.out.println ("Mensaje enviado!");
+}
+catch (Exception e)
+{
+ExceptionManager.ManageException(e);
+}
+}
+private static MimeMessage getMessage(Session session, String from, String to, String mensaje)
+{
+try{
+MimeMessage msg = new MimeMessage(session);
+msg.setText(mensaje);
+msg.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+msg.setFrom(new InternetAddress(from,"JavaMail en accion"));
+return msg;
+}
+catch (java.io.UnsupportedEncodingException ex)
+{
+ExceptionManager.ManageException(ex);
+return null;
+}
+catch (MessagingException ex)
+{
+ExceptionManager.ManageException(ex);
+return null;
+}
+}
+}
+class SMTPAuthentication extends javax.mail.Authenticator
+{
+public PasswordAuthentication getPasswordAuthentication()
+{
+String username = "ivi";
+String password = "123";
+return new PasswordAuthentication(username, password);
+}
+}
+class ExceptionManager
+{
+public static void ManageException (Exception e)
+{
+System.out.println ("Se ha producido una exception");
+System.out.println (e.getMessage());
+e.printStackTrace(System.out);
+}
+}
