@@ -1,0 +1,4 @@
+search #casa# wheRe  row=1 and column=5;
+search #bolsa# wheRe  row=2 and column=9 on not( fila);
+search #caro# wheRe  row=1 and column=6   on not(diagonal_derecha_arriba);
+SEARCH #aceite# wheRe  row=4 and column=5 on fila;

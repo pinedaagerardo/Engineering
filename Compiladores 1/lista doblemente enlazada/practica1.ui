@@ -1,0 +1,342 @@
+<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
+<class>practica1</class>
+<widget class="QWidget">
+    <property name="name">
+        <cstring>practica1</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>590</width>
+            <height>470</height>
+        </rect>
+    </property>
+    <property name="sizePolicy">
+        <sizepolicy>
+            <hsizetype>4</hsizetype>
+            <vsizetype>4</vsizetype>
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+        </sizepolicy>
+    </property>
+    <property name="maximumSize">
+        <size>
+            <width>590</width>
+            <height>470</height>
+        </size>
+    </property>
+    <property name="caption">
+        <string>Practica 1</string>
+    </property>
+    <widget class="QPushButton">
+        <property name="name">
+            <cstring>btnSalir</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>270</x>
+                <y>440</y>
+                <width>50</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Salir</string>
+        </property>
+    </widget>
+    <widget class="QTabWidget">
+        <property name="name">
+            <cstring>tabWidget2</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>590</width>
+                <height>430</height>
+            </rect>
+        </property>
+        <widget class="QWidget">
+            <property name="name">
+                <cstring>tab</cstring>
+            </property>
+            <attribute name="title">
+                <string>Insertar</string>
+            </attribute>
+            <widget class="QLabel">
+                <property name="name">
+                    <cstring>textLabel1</cstring>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>60</x>
+                        <y>110</y>
+                        <width>39</width>
+                        <height>16</height>
+                    </rect>
+                </property>
+                <property name="sizePolicy">
+                    <sizepolicy>
+                        <hsizetype>5</hsizetype>
+                        <vsizetype>5</vsizetype>
+                        <horstretch>0</horstretch>
+                        <verstretch>0</verstretch>
+                    </sizepolicy>
+                </property>
+                <property name="text">
+                    <string>Texto:</string>
+                </property>
+            </widget>
+            <widget class="QLabel">
+                <property name="name">
+                    <cstring>textLabel2</cstring>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>80</x>
+                        <y>180</y>
+                        <width>19</width>
+                        <height>16</height>
+                    </rect>
+                </property>
+                <property name="text">
+                    <string>ID:</string>
+                </property>
+            </widget>
+            <widget class="QLineEdit">
+                <property name="name">
+                    <cstring>txtId_ins</cstring>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>130</x>
+                        <y>180</y>
+                        <width>131</width>
+                        <height>21</height>
+                    </rect>
+                </property>
+            </widget>
+            <widget class="QPushButton">
+                <property name="name">
+                    <cstring>btnGuardar</cstring>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>260</x>
+                        <y>290</y>
+                        <width>70</width>
+                        <height>20</height>
+                    </rect>
+                </property>
+                <property name="text">
+                    <string>Guardar</string>
+                </property>
+            </widget>
+            <widget class="QLineEdit">
+                <property name="name">
+                    <cstring>txtTexto_ins</cstring>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>130</x>
+                        <y>110</y>
+                        <width>291</width>
+                        <height>21</height>
+                    </rect>
+                </property>
+            </widget>
+        </widget>
+        <widget class="QWidget">
+            <property name="name">
+                <cstring>TabPage</cstring>
+            </property>
+            <attribute name="title">
+                <string>Nodos</string>
+            </attribute>
+            <widget class="QLabel">
+                <property name="name">
+                    <cstring>textLabel4</cstring>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>70</x>
+                        <y>90</y>
+                        <width>39</width>
+                        <height>16</height>
+                    </rect>
+                </property>
+                <property name="text">
+                    <string>Texto:</string>
+                </property>
+            </widget>
+            <widget class="QLabel">
+                <property name="name">
+                    <cstring>textLabel5</cstring>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>90</x>
+                        <y>160</y>
+                        <width>19</width>
+                        <height>16</height>
+                    </rect>
+                </property>
+                <property name="text">
+                    <string>ID:</string>
+                </property>
+            </widget>
+            <widget class="QPushButton">
+                <property name="name">
+                    <cstring>btnPrev</cstring>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>240</x>
+                        <y>240</y>
+                        <width>40</width>
+                        <height>20</height>
+                    </rect>
+                </property>
+                <property name="text">
+                    <string>&lt;</string>
+                </property>
+            </widget>
+            <widget class="QPushButton">
+                <property name="name">
+                    <cstring>btnNext</cstring>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>330</x>
+                        <y>240</y>
+                        <width>40</width>
+                        <height>20</height>
+                    </rect>
+                </property>
+                <property name="text">
+                    <string>&gt;</string>
+                </property>
+            </widget>
+            <widget class="QLineEdit">
+                <property name="name">
+                    <cstring>txtTexto_nodos</cstring>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>140</x>
+                        <y>90</y>
+                        <width>310</width>
+                        <height>21</height>
+                    </rect>
+                </property>
+                <property name="readOnly">
+                    <bool>true</bool>
+                </property>
+            </widget>
+            <widget class="QLineEdit">
+                <property name="name">
+                    <cstring>txtId_nodos</cstring>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>140</x>
+                        <y>160</y>
+                        <width>160</width>
+                        <height>21</height>
+                    </rect>
+                </property>
+                <property name="readOnly">
+                    <bool>true</bool>
+                </property>
+            </widget>
+            <widget class="QPushButton">
+                <property name="name">
+                    <cstring>btnEliminar</cstring>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>270</x>
+                        <y>300</y>
+                        <width>70</width>
+                        <height>20</height>
+                    </rect>
+                </property>
+                <property name="text">
+                    <string>Eliminar</string>
+                </property>
+            </widget>
+            <widget class="QPushButton">
+                <property name="name">
+                    <cstring>btnVaciar</cstring>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>450</x>
+                        <y>340</y>
+                        <width>81</width>
+                        <height>21</height>
+                    </rect>
+                </property>
+                <property name="text">
+                    <string>Vaciar lista</string>
+                </property>
+            </widget>
+        </widget>
+    </widget>
+</widget>
+<connections>
+    <connection>
+        <sender>btnGuardar</sender>
+        <signal>clicked()</signal>
+        <receiver>practica1</receiver>
+        <slot>Iguardar()</slot>
+    </connection>
+    <connection>
+        <sender>btnSalir</sender>
+        <signal>clicked()</signal>
+        <receiver>practica1</receiver>
+        <slot>salir()</slot>
+    </connection>
+    <connection>
+        <sender>btnEliminar</sender>
+        <signal>clicked()</signal>
+        <receiver>practica1</receiver>
+        <slot>Ieliminar()</slot>
+    </connection>
+    <connection>
+        <sender>btnNext</sender>
+        <signal>clicked()</signal>
+        <receiver>practica1</receiver>
+        <slot>Inext()</slot>
+    </connection>
+    <connection>
+        <sender>btnPrev</sender>
+        <signal>clicked()</signal>
+        <receiver>practica1</receiver>
+        <slot>Iprev()</slot>
+    </connection>
+    <connection>
+        <sender>btnVaciar</sender>
+        <signal>clicked()</signal>
+        <receiver>practica1</receiver>
+        <slot>Ivaciar()</slot>
+    </connection>
+</connections>
+<includes>
+    <include location="local" impldecl="in implementation">practica1.ui.h</include>
+</includes>
+<slots>
+    <slot access="private">Iguardar()</slot>
+    <slot access="private">salir()</slot>
+    <slot access="private">Ieliminar()</slot>
+    <slot access="private">Inext()</slot>
+    <slot access="private">Iprev()</slot>
+    <slot>Ivaciar()</slot>
+</slots>
+<functions>
+    <function returnType="bool">isNumeric( QString s )</function>
+</functions>
+<pixmapinproject/>
+<layoutdefaults spacing="6" margin="11"/>
+</UI>
