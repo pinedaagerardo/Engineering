@@ -1,0 +1,10 @@
+B,2,1,inicio,0
+C,3,2,igual,0
+D,3,3,adelante,2
+E,4,4,atras,1
+F,4,5,tirar,2
+G,4,6,adelante,2
+H,5,7,igual,0
+G,6,8,igual,0
+F,6,9,adelante,1
+E,7,10,fin,0
